@@ -2,12 +2,21 @@ import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
 const typeDefs = `#graphql
+type Food {
+  id: ID!
+  name: String
+  prepTime: String
+  origin: String
+  userId: Int
+}
+
 type User {
   id: ID!
   firstName: String
   lastName: String
   age: Int
   location: String
+  favoriteFoods: [Food]
 }
 
  type Query {
@@ -15,6 +24,30 @@ type User {
   user(id: ID!): User
  }
 `;
+
+const foods = [
+  {
+    id: 1,
+    name: 'Spaghetti',
+    prepTime: '10mins',
+    origin: 'Africa',
+    userId: 3,
+  },
+  {
+    id: 2,
+    name: 'Rice',
+    prepTime: '10mins',
+    origin: 'Africa',
+    userId: 1,
+  },
+  {
+    id: 3,
+    name: 'Hamburger',
+    prepTime: '15mins',
+    origin: 'Germany',
+    userId: 1,
+  },
+];
 
 const users = [
   {
@@ -48,6 +81,12 @@ const resolvers = {
 
     user: (parent, args) => {
       return users.find((user) => user.id === parseInt(args.id));
+    },
+  },
+
+  User: {
+    favoriteFoods: (parent) => {
+      return foods.filter((food) => food.userId === parent.id);
     },
   },
 };
