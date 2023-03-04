@@ -1,0 +1,16 @@
+{
+  "name": "simple-graphql-api-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "repository": "https://github.com/web-dev-focus/simple-graphql-api-server.git",
+  "author": "Victor Ejike Nwosu <ejikello123@yahoo.com>",
+  "license": "MIT",
+  "scripts": {
+    "run-node": "node --watch graphql.js"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.4.1",
+    "graphql": "^16.6.0"
+  }
+}
